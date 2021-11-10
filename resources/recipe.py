@@ -56,3 +56,15 @@ class RecipeResource(Resource):
         recipe.directions = data['directions']
 
         return recipe.data, HTTPStatus.OK
+
+class RecipePublishResource(Resource):
+
+    def put(self, recipe_id):
+        recipe = next((recipe for recipe in recipe_list if recipe.id == recipe_id), None)
+
+        if recipe is None:
+            return{'message': 'Recipe not found'}, HTTPStatus.NOT_FOUND
+
+        recipe.is_publish = True
+
+        return {}, HTTPStatus.NO_CONTENT
