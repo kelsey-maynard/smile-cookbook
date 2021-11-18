@@ -1,3 +1,5 @@
+from extensions import db
+
 recipe_list = []
 
 def get_last_id():
@@ -7,24 +9,15 @@ def get_last_id():
         return 1
     return last_recipe.id + 1
 
-class Recipe:
+class Recipe(db.Model):
+    __tablename__ = 'recipe'
 
-    def __init__(self, name, description, num_of_servings, cook_time, directions):
-        self.id = get_last_id()
-        self.name = name
-        self.description = description
-        self.num_of_servings = num_of_servings
-        self.cook_time = cook_time
-        self.directions = directions
-        self.is_publish = False
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), nullable=False, unique=True)
+    email = db.Column(db.String(200), nullable=False, unique=True)
+    password = db.Column(db.String(200))
+    is_active = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())
 
-    @property
-    def data(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'description': self.description,
-            'num_of_servings': self.num_of_servings,
-            'cook_time': self.cook_time,
-            'directions': self.directions,
-        }
+    user_id = db.Column(db.Integer(), db.ForeignKey("user.id"))
