@@ -36,4 +36,5 @@ api.add_resource(RecipeResource, '/recipes/<int:recipe_id>')
 api.add_resource(RecipePublishResource, '/recipes/<int:recipe_id>/publish')
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app = create_app()
+    app.run()
