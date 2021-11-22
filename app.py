@@ -17,11 +17,11 @@ def create_app():
     return app
 
 def register_extensions(app):
-    db.init__app(app)
+    db.init_app(app)
     migrate = Migrate(app,db)
 
 def register_resources(app):
-    api=Api(app)
+    api = Api(app)
 
     api.add_resource(RecipeListResource, '/recipes')
     api.add_resource(RecipeResource, '/recipes/<int:recipe_id>')
