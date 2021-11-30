@@ -18,8 +18,7 @@ def create_app():
 
 def register_extensions(app):
     db.init_app(app)
-    migrate = Migrate()
-    migrate.init_app(app, db)
+    migrate = Migrate(app,db)
 
 def register_resources(app):
     api = Api(app)
