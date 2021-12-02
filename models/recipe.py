@@ -13,10 +13,12 @@ class Recipe(db.Model):
     __tablename__ = 'recipe'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), nullable=False, unique=True)
-    email = db.Column(db.String(200), nullable=False, unique=True)
-    password = db.Column(db.String(200))
-    is_active = db.Column(db.Boolean, default=False)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(200))
+    num_of_servings = db.Column(db.Integer)
+    cook_time = db.Column(db.Integer)
+    directions = db.Column(db.String(1000))
+    is_publish = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
     updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())
 
